@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de Funciones</title>
+    </head>
+    <body>
+
+        <div th:replace="fragments :: navbar"></div>
+
+        <h2>Lista de Funciones</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Película</th>
+                    <th>Sala</th>
+                    <th>Fecha y Hora</th>
+                    <th>Asientos Disponibles</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="funcion : ${funciones}">
+                    <td th:text="${funcion.id}"></td>
+                    <td th:text="${funcion.obra.title}"></td>
+                    <td th:text="${funcion.room.name}"></td>
+                    <td th:text="${funcion.funcionDate}"></td>
+                    <td th:text="${funcion.availableSeats}"></td>
+                    <td><a th:href="@{'/admin/funciones/edit/' + ${funcion.id}}">Editar</a></td>
+                    <td><a th:href="@{'/admin/funciones/delete/' + ${funcion.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/admin/funciones/create}">Agregar Proyección</a>
+
+    </body>
+</html>

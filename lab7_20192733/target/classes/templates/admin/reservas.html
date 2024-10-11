@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Todas las Reservas</title>
+    </head>
+    <body>
+
+        <div th:replace="fragments :: navbar"></div>
+
+        <h2>Todas las Reservas</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Película</th>
+                    <th>Sala</th>
+                    <th>Fecha y Hora</th>
+                    <th>Asiento</th>
+                    <th>Cancelar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <td th:text="${reservation.id}"></td>
+                    <td th:text="${reservation.function.obra.title}"></td>
+                    <td th:text="${reservation.function.room.name}"></td>
+                    <td th:text="${reservation.function.funcionDate}"></td>
+                    <td th:text="${reservation.roomSeat.seatNumber}"></td>
+                    <td><a th:href="@{'/admin/reservas/cancel/' + ${reservation.id}}">Cancelar</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

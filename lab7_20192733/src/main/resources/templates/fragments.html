@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Fragments</title>
+    </head>
+    <body>
+
+        <div th:fragment="navbar">
+            <nav>
+                <ul>
+                    <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <a th:href="@{/admin/funciones}">Funciones</a>
+                        <a th:href="@{/admin/reservas}">Todas las Reservas</a>
+                    </li>
+                    <li th:if="${#authorization.expression('hasRole(''ROLE_GERENTE'')')}">
+                        <a th:href="@{/gerente/salas}">Salas</a>
+                        <a th:href="@{/gerente/obras}">Obras</a>
+                        <a th:href="@{/gerente/funciones}">Funciones</a>
+                    </li>
+                    <li th:if="${#authorization.expression('hasRole(''ROLE_CLIENTE'')')}">
+                        <a th:href="@{/cliente/obras}">Obras</a>
+                        <a th:href="@{/cliente/reservas}">Mis Reservas</a>
+                    </li>
+                </ul>
+
+                <div>
+                    <span>Bienvenido, <b th:text="${#authentication.name}"></b></span>
+                    <a th:href="@{/logout}">Cerrar Sesión</a>
+                </div>
+            </nav>
+        </div>
+
+
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Mis Reservas</title>
+    </head>
+    <body>
+
+        <div th:replace="fragments :: navbar"></div>
+
+        <h2>Mis Reservas</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Película</th>
+                    <th>Sala</th>
+                    <th>Fecha y Hora</th>
+                    <th>Asiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <td th:text="${reservation.id}"></td>
+                    <td th:text="${reservation.function.obra.title}"></td>
+                    <td th:text="${reservation.function.room.name}"></td>
+                    <td th:text="${reservation.function.funcionDate}"></td>
+                    <td th:text="${reservation.roomSeat.seatNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Formulario para realizar una reserva -->
+        <form th:action="@{/cliente/reservas/save}" method="post">
+            <label for="functionId">Seleccione una función:</label>
+            <select id="functionId" name="functionId">
+                <option th:each="funcion : ${functions}" th:value="${funcion.id}" th:text="${funcion.obra.title} + ' - ' + ${funcion.funcionDate}"></option>
+            </select>
+            <button type="submit">Reservar</button>
+        </form>
+
+    </body>
+</html>

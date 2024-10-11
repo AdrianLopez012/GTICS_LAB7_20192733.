@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de Salas</title>
+    </head>
+    <body>
+
+        <div th:replace="fragments :: navbar"></div>
+
+                <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="room : ${rooms}">
+                    <td th:text="${room.id}"></td>
+                    <td th:text="${room.name}"></td>
+                    <td th:text="${room.capacity}"></td>
+                    <td><a th:href="@{'/gerente/salas/edit/' + ${room.id}}">Editar</a></td>
+                    <td><a th:href="@{'/gerente/salas/delete/' + ${room.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/gerente/salas/create}">Agregar Sala</a>
+
+    </body>
+</html>
